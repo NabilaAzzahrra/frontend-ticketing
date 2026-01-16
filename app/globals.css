@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "aos/dist/aos.css";
+@import "select2/dist/css/select2.css";
 
 :root {
   --background: #ffffff;
@@ -20,7 +22,101 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
+/* hide scrollbar tapi tetap bisa scroll */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* ============================= */
+/* DATATABLE FLEX LAYOUT FIX     */
+/* ============================= */
+
+/* Wrapper bawah: info + pagination */
+.dt-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Hilangkan float bawaan DataTables */
+.dataTables_info,
+.dataTables_paginate {
+  float: none !important;
+}
+
+/* Pagination jadi flex */
+.dataTables_paginate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Tombol pagination */
+.dataTables_paginate .paginate_button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+/* Active page */
+.dataTables_paginate .paginate_button.current {
+  background-color: #2563eb;
+  color: #fff !important;
+  border-color: #2563eb;
+}
+
+.dt-input {
+  border: 1px solid #e5e7eb;
+  margin-left: 10px;
+  border-radius: 9999px;
+  padding: 6px 12px; /* atas-bawah | kiri-kanan */
+  outline: none;
+}
+
+/* efek focus */
+.dt-input:focus {
+  border-color: #2563eb;
+}
+
+.dt-length select {
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  margin-right: 10px;
+  outline: none;
+}
+
+/* FIX SELECT2 OPTION PADDING */
+.select2-container--default .select2-results__option {
+  padding: 8px 12px !important;
+}
+
+/* FIX SEARCH INPUT */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  padding: 8px 10px !important;
+  box-sizing: border-box;
+}
+
+/* FIX SELECT BOX HEIGHT */
+.select2-container .select2-selection--single {
+  height: 38px !important;
+  padding: 4px 8px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* FIX TEXT POSISI */
+.select2-selection__rendered {
+  padding-left: 0 !important;
+}
+
