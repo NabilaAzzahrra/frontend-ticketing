@@ -1,0 +1,19 @@
+{
+  "/(app)/addkaryawan/page": "/addkaryawan",
+  "/(app)/addticket/page": "/addticket",
+  "/(app)/assigned/page": "/assigned",
+  "/(app)/configuration/page": "/configuration",
+  "/(app)/created/page": "/created",
+  "/(app)/dashboard/page": "/dashboard",
+  "/(app)/divisi/page": "/divisi",
+  "/(app)/headof/page": "/headof",
+  "/(app)/karyawan/edit/[id]/page": "/karyawan/edit/[id]",
+  "/(app)/karyawan/page": "/karyawan",
+  "/(app)/profile/page": "/profile",
+  "/(app)/ringkasan/page": "/ringkasan",
+  "/(auth)/page": "/",
+  "/(auth)/register/page": "/register",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico"
+}

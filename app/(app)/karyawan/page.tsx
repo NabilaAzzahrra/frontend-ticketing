@@ -286,14 +286,74 @@ export default function DashboardPage() {
         </div> */}
         <div className="flex gap-2">
           <button
-            onClick={() => router.push("/addkaryawan")}
+            onClick={async () => {
+              try {
+                const response = await fetch(
+                  "http://localhost:3001/api/employee/export/pdf",
+                  {
+                    method: "GET",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+                    },
+                  }
+                );
+
+                if (!response.ok) {
+                  throw new Error("Gagal export PDF");
+                }
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                // buka di tab baru
+                window.open(url, "_blank");
+
+                // kalau mau auto download, pakai ini 👇
+                // const a = document.createElement("a");
+                // a.href = url;
+                // a.download = "employee-list.pdf";
+                // document.body.appendChild(a);
+                // a.click();
+                // a.remove();
+              } catch (error) {
+                console.error(error);
+                alert("Export PDF gagal");
+              }
+            }}
             className="px-4 py-2 bg-red-100 text-red-500 rounded-xl hover:bg-red-200 text-sm flex items-center"
           >
             <i className="fi fi-sr-file-export mr-2" />
             Export to pdf
           </button>
           <button
-            onClick={() => router.push("/addkaryawan")}
+            onClick={async () => {
+              try {
+                const res = await fetch(
+                  "http://localhost:3001/api/employee/export/excel",
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+                    },
+                  }
+                );
+
+                if (!res.ok) throw new Error("Export gagal");
+
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "data-karyawan.xlsx";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+              } catch (err) {
+                alert("Export Excel gagal");
+              }
+            }}
             className="px-4 py-2 bg-emerald-100 text-emerald-500 rounded-xl hover:bg-emerald-200 text-sm flex items-center"
           >
             <i className="fi fi-sr-file-excel mr-2" />

@@ -3,21 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+const Select = dynamic(() => import("react-select"), { ssr: false });
+import type { SingleValue } from "react-select";
+import toast from "react-hot-toast";
 
 export default function DashboardPage() {
-  const options = [
-    { value: "1", label: "IT" },
-    { value: "2", label: "HR" },
-    { value: "3", label: "Finance" },
-  ];
-  const optionsKaryawan = [
-    { value: "1", label: "Adi Apriyanto" },
-    { value: "2", label: "Nabila Azzahra" },
-    { value: "3", label: "Asep Manarul Hidayah" },
-  ];
-  const Select = dynamic(() => import("react-select"), {
-    ssr: false,
-  });
   const tableRef = useRef<HTMLTableElement>(null);
   const [data, setData] = useState<any[]>([]);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
@@ -25,6 +15,65 @@ export default function DashboardPage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  type OptionType = {
+    value: string;
+    label: string;
+  };
+  const [division, setDivision] = useState<OptionType | null>(null);
+  const [employee, setEmployee] = useState<OptionType | null>(null);
+
+  const [options, setOptions] = useState<OptionType[]>([]);
+  const [optionsEmployee, setOptionsEmployee] = useState<OptionType[]>([]);
+
+  const [nik_headof, setnik_headof] = useState("");
+  const [division_id, setdivision_id] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  /* ==========================
+       FETCH DIVISION
+    ========================== */
+  useEffect(() => {
+    const fetchDivision = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/division");
+        const json = await res.json();
+
+        const mapped: OptionType[] = json.data.map((item: any) => ({
+          value: String(item.id),
+          label: item.division,
+        }));
+
+        setOptions(mapped);
+      } catch (error) {
+        console.error("Failed to fetch division", error);
+      }
+    };
+
+    fetchDivision();
+  }, []);
+
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/employee");
+        const json = await res.json();
+
+        const mapped: OptionType[] = json.data
+          .filter((item: any) => item.users && item.users.length > 0)
+          .map((item: any) => ({
+            value: String(item.nik),
+            label: item.users[0].name,
+          }));
+
+        setOptionsEmployee(mapped);
+      } catch (error) {
+        console.error("Failed to fetch employee", error);
+      }
+    };
+
+    fetchEmployee();
+  }, []);
 
   // ================= FETCH DATA =================
   useEffect(() => {
@@ -107,7 +156,7 @@ export default function DashboardPage() {
 
   const handleConfirmDelete = async () => {
     try {
-      await fetch(`http://localhost:3001/api/employees/${selectedId}`, {
+      await fetch(`http://localhost:3001/api/headof/${selectedId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -120,19 +169,113 @@ export default function DashboardPage() {
       console.error(error);
     }
   };
-  const handleConfirmUpdate = async () => {
-    try {
-      await fetch(`http://localhost:3001/api/employees/${selectedId}`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
 
-      setData((prev) => prev.filter((item) => item.id !== selectedId));
-      setShowDeleteModal(false);
+  const handleConfirmUpdate = async () => {
+    if (!selectedId || !division || !employee) {
+      alert("Data belum lengkap");
+      return;
+    }
+
+    const nik_headof = employee.value;
+    const division_id = division.value;
+
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/headof/${selectedId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify({
+            nik_headof,
+            division_id,
+          }),
+        },
+      );
+
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.message);
+
+      // 🔁 UPDATE STATE (BUKAN FILTER!)
+      setData((prev) =>
+        prev.map((item) =>
+          item.id === selectedId
+            ? {
+                ...item,
+                division: {
+                  ...item.division,
+                  id: division.value,
+                  division: division.label,
+                },
+                user: {
+                  ...item.user,
+                  nik: employee.value,
+                  name: employee.label,
+                },
+              }
+            : item,
+        ),
+      );
+
+      setShowUpdateModal(false);
+      setSelectedId(null);
     } catch (error) {
       console.error(error);
+      alert("Gagal update data");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (!division || !employee) {
+      alert("Divisi dan Head of wajib dipilih");
+      setLoading(false);
+      return;
+    }
+
+    const nik_headof = employee.value;
+    const division_id = division.value;
+
+    try {
+      console.log("======= FORM STATE ========");
+      console.log("nik_headof:", nik_headof);
+      console.log("division_id:", division_id);
+
+      const res = await fetch("http://localhost:3001/api/headof", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+        },
+        body: JSON.stringify({
+          nik_headof,
+          division_id,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Gagal tambah head of");
+      }
+
+      toast.success("Head of berhasil ditambahkan 🎉");
+
+      setTimeout(() => {
+        router.push("/headof");
+      }, 1000);
+
+      // reset react-select
+      setDivision(null);
+      setEmployee(null);
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -153,30 +296,42 @@ export default function DashboardPage() {
             Form Tambah Head of
           </div>
           <hr className="border-gray-400" />
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="w-full mt-4">
               <div className="w-full">
                 <label htmlFor="">Divisi</label>
                 <Select
                   options={options}
-                  placeholder="Pilih Divisi"
-                  className="text-sm"
+                  value={division}
+                  onChange={(selected) =>
+                    setDivision(selected as OptionType | null)
+                  }
+                  placeholder="Pilih divisi"
+                  isClearable
                 />
               </div>
             </div>
             <div className="w-full mt-4">
               <div className="w-full">
-                <label htmlFor="">Karyawan</label>
+                <label htmlFor="">Head of</label>
                 <Select
-                  options={optionsKaryawan}
-                  placeholder="Pilih Karyawan"
-                  className="text-sm"
+                  options={optionsEmployee}
+                  value={employee}
+                  onChange={(selected) =>
+                    setEmployee(selected as OptionType | null)
+                  }
+                  placeholder="Pilih karyawan"
+                  isClearable
                 />
               </div>
             </div>
-            <button className="px-4 py-2 bg-sky-100 text-sky-500 rounded-xl hover:bg-sky-200 text-sm flex items-center justify-end mt-4 ml-[600px]">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 bg-sky-100 text-sky-500 rounded-xl hover:bg-sky-200 text-sm flex items-center justify-end mt-4 ml-[600px]"
+            >
               <i className="fi fi-sr-disk mr-2 mt-1" />
-              Simpan
+              {loading ? "Menyimpan..." : "Simpan"}
             </button>
           </form>
         </div>
@@ -188,6 +343,7 @@ export default function DashboardPage() {
                 <th className="w-10">No</th>
                 <th className="w-20">NIK</th>
                 <th className="w-96">Nama Head of</th>
+                <th className="w-96">Divisi</th>
                 <th className="w-10">Action</th>
               </tr>
             </thead>
@@ -197,7 +353,8 @@ export default function DashboardPage() {
                 <tr key={item.id}>
                   <td>{index + 1}</td>
                   <td>{item.nik_headof}</td>
-                  <td>{item.division_id}</td>
+                  <td>{item.user?.name}</td>
+                  <td>{item.division?.division}</td>
                   <td className="relative">
                     <button
                       onClick={() => toggleMenu(item.id)}
@@ -209,7 +366,22 @@ export default function DashboardPage() {
                     {openMenu === item.id && (
                       <div className="absolute left-0 -ml-32 w-44 bg-white rounded shadow border border-gray-200 z-50">
                         <button
-                          onClick={() => handleUpdate(item.id)}
+                          onClick={() => {
+                            setSelectedId(item.id);
+
+                            // SET VALUE REACT-SELECT
+                            setDivision({
+                              value: String(item.division.id),
+                              label: item.division.division,
+                            });
+
+                            setEmployee({
+                              value: String(item.user.nik), // atau user.id SESUAI FK
+                              label: item.user.name,
+                            });
+
+                            setShowUpdateModal(true);
+                          }}
                           className="w-full px-4 py-2 text-left text-amber-500 hover:bg-amber-100"
                         >
                           <i className="fi fi-sr-user-pen mr-4"></i> Update
@@ -266,18 +438,26 @@ export default function DashboardPage() {
                   <label htmlFor="">Divisi</label>
                   <Select
                     options={options}
-                    placeholder="Pilih Divisi"
-                    className="text-sm"
+                    value={division}
+                    onChange={(selected) =>
+                      setDivision(selected as OptionType | null)
+                    }
+                    placeholder="Pilih divisi"
+                    isClearable
                   />
                 </div>
               </div>
               <div className="w-full mt-4">
                 <div className="w-full">
-                  <label htmlFor="">Karyawan</label>
+                  <label htmlFor="">Headof</label>
                   <Select
-                    options={optionsKaryawan}
-                    placeholder="Pilih Karyawan"
-                    className="text-sm"
+                    options={optionsEmployee}
+                    value={employee}
+                    onChange={(selected) =>
+                      setEmployee(selected as OptionType | null)
+                    }
+                    placeholder="Pilih karyawan"
+                    isClearable
                   />
                 </div>
               </div>

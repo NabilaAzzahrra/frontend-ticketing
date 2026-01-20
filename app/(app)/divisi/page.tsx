@@ -2,15 +2,41 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function DashboardPage() {
   const tableRef = useRef<HTMLTableElement>(null);
   const [data, setData] = useState<any[]>([]);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchDivision = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/division", {
+          headers: {
+            "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+          },
+        });
+
+        if (!res.ok) throw new Error("Gagal fetch division");
+
+        const result = await res.json();
+      } catch (error) {
+        console.error("Fetch division error:", error);
+      }
+    };
+
+    fetchDivision();
+  }, []);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showStatusModal, setShowStatusModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [division, setDivision] = useState("");
+
+  const [rawData, setRawData] = useState<any[]>([]);
 
   // ================= FETCH DATA =================
   useEffect(() => {
@@ -32,6 +58,7 @@ export default function DashboardPage() {
         if (!res.ok) throw new Error("Failed fetch employee");
 
         const result = await res.json();
+        setRawData(result?.data || []);
         setData(result?.data || []);
       } catch (err) {
         console.error("Fetch employee error:", err);
@@ -86,39 +113,105 @@ export default function DashboardPage() {
     setShowDeleteModal(true);
   };
 
-  const handleUpdate = (id: number) => {
-    setSelectedId(id);
-    setShowUpdateModal(true);
-  };
-
   const handleConfirmDelete = async () => {
-    try {
-      await fetch(`http://localhost:3001/api/employees/${selectedId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+    if (!selectedId) return;
 
+    try {
+      const res = await fetch(
+        `http://localhost:3001/api/division/${selectedId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+          },
+        },
+      );
+
+      if (!res.ok) {
+        throw new Error("Gagal menghapus data");
+      }
+
+      // optimistic update (langsung ilang dari tabel)
       setData((prev) => prev.filter((item) => item.id !== selectedId));
+
       setShowDeleteModal(false);
+      setSelectedId(null);
+
+      // sync ulang (Next.js App Router)
+      router.refresh();
     } catch (error) {
       console.error(error);
+      alert("Gagal menghapus data");
     }
   };
+
   const handleConfirmUpdate = async () => {
+    if (!selectedId) {
+      alert("ID belum dipilih");
+      return;
+    }
+
     try {
-      await fetch(`http://localhost:3001/api/employees/${selectedId}`, {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      const res = await fetch(
+        `http://localhost:3001/api/division/${selectedId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+          },
+          body: JSON.stringify({
+            division,
+          }),
         },
+      );
+
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.message);
+
+      // ✅ UPDATE STATE LANGSUNG
+      setData((prev) =>
+        prev.map((item) =>
+          item.id === selectedId ? { ...item, division } : item,
+        ),
+      );
+
+      toast.success("Data berhasil diperbarui 🎉");
+      setShowStatusModal(false);
+      setSelectedId(null);
+    } catch (err: any) {
+      alert(err.message || "Gagal update status");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (!division) {
+      alert("Divisi wajib dipilih");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:3001/api/division`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "lp3i-api-key": "aEof9XqcH34k3g6IbJcQLxGY",
+        },
+        body: JSON.stringify({
+          division,
+        }),
       });
 
-      setData((prev) => prev.filter((item) => item.id !== selectedId));
-      setShowDeleteModal(false);
-    } catch (error) {
-      console.error(error);
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.message);
+
+      toast.success("Data berhasil ditambahkan 🎉");
+    } catch (err: any) {
+      alert(err.message || "Gagal menambahkan divisi");
     }
   };
 
@@ -133,33 +226,49 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="flex gap-5 items-start">
-        <div className="bg-white rounded-lg shadow px-4 py-6 mt-6 w-1/2">
-          <div className="font-semibold text-lg text-gray-400">Form Tambah Divisi</div>
-          <hr className="border-gray-400" />
-          <form action="">
-            <div className="w-full mt-4">
-              <label htmlFor="">Divisi</label>
+      {/* FILTER */}
+      <div className="py-3 flex items-center justify-between gap-3">
+        <div className="flex gap-2">
+          <button
+            onClick={() => router.push("/addkaryawan")}
+            className="px-4 py-2 bg-sky-100 text-sky-500 rounded-xl hover:bg-sky-200 text-sm flex items-center"
+          >
+            <i className="fi fi-sr-user-add mr-2" />
+            Tambah
+          </button>
+        </div>
+      </div>
+      <div className="flex gap-5">
+        <div className="bg-white rounded-b-lg shadow p-4 mt-6 w-1/2">
+          <form onSubmit={handleSubmit}>
+            <div className="w-full">
+              <label htmlFor="">NIK</label>
               <input
                 type="text"
-                placeholder="Divisi"
+                placeholder="Division"
+                value={division}
+                onChange={(e) => setDivision(e.target.value)}
                 className="w-full border border-[#D0D0D0] rounded-lg px-4 py-2 text-sm"
               />
             </div>
-            <button className="px-4 py-2 bg-sky-100 text-sky-500 rounded-xl hover:bg-sky-200 text-sm flex items-center justify-end mt-4 ml-[600px]">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 bg-sky-100 text-sky-500 rounded-xl hover:bg-sky-200 text-sm flex items-center justify-end mt-9"
+            >
               <i className="fi fi-sr-disk mr-2 mt-1" />
-              Simpan
+              {loading ? "Menyimpan..." : "Simpan"}
             </button>
           </form>
         </div>
         {/* TABLE */}
-        <div className="bg-white rounded-lg shadow p-4 mt-6 w-full">
+        <div className="bg-white rounded-b-lg shadow p-4 mt-6 w-full">
           <table ref={tableRef} className="display w-full text-sm">
             <thead>
               <tr>
-                <th>No</th>
-                <th>Divisi</th>
-                <th>Action</th>
+                <th className="w-10">No</th>
+                <th className="w-20">Divisi</th>
+                <th className="w-10">Action</th>
               </tr>
             </thead>
 
@@ -179,15 +288,18 @@ export default function DashboardPage() {
                     {openMenu === item.id && (
                       <div className="absolute left-0 -ml-32 w-44 bg-white rounded shadow border border-gray-200 z-50">
                         <button
-                          onClick={() => handleUpdate(item.id)}
-                          className="w-full px-4 py-2 text-left text-amber-500 hover:bg-amber-100"
+                          onClick={() => {
+                            setSelectedId(item.id); // ✅ SIMPAN ID
+                            setDivision(item.division); // 🔥 simpan nik
+                            setShowStatusModal(true); // buka modal
+                          }}
+                          className="w-full px-4 py-2 text-left text-emerald-600 hover:bg-emerald-50"
                         >
-                          <i className="fi fi-sr-user-pen mr-4"></i> Update
+                          <i className="fi fi-sr-dice-d6 mr-4" /> Update
                         </button>
-
                         <button
                           onClick={() => handleDeleteClick(item.id)}
-                          className="w-full px-4 py-2 text-left text-red-500 hover:bg-red-100"
+                          className="w-full px-4 py-2 text-left text-red-600 hover:bg-red-50"
                         >
                           <i className="fi fi-sr-trash mr-4" /> Hapus
                         </button>
@@ -202,7 +314,7 @@ export default function DashboardPage() {
       </div>
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded w-96">
+          <div className="bg-white p-6 rounded-xl w-96">
             <h2 className="text-lg font-semibold bg-red-100 text-red-600 px-4 py-2 text-center rounded-xl">
               Konfirmasi Hapus
             </h2>
@@ -224,32 +336,33 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
-      {showUpdateModal && (
+      {showStatusModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded w-96">
+          <div className="bg-white p-6 rounded-xl w-96">
             <h2 className="text-lg font-semibold bg-emerald-100 text-emerald-600 px-4 py-2 text-center rounded-xl">
-              Konfirmasi Update
+              Konfirmasi Update Data
             </h2>
-            <div className="mt-4">
+            <div className="my-8">
               <div className="w-full">
-                <label htmlFor="">Divisi</label>
                 <input
                   type="text"
-                  placeholder="Divisi"
+                  placeholder="Division"
+                  value={division}
+                  onChange={(e) => setDivision(e.target.value)}
                   className="w-full border border-[#D0D0D0] rounded-lg px-4 py-2 text-sm"
                 />
               </div>
             </div>
-            <div className="flex justify-end gap-2 mt-4">
+            <div className="flex justify-end gap-2">
               <button
-                onClick={() => setShowUpdateModal(false)}
-                className="px-4 py-2 border rounded-4xl"
+                onClick={() => setShowStatusModal(false)}
+                className="px-4 py-1 border rounded-4xl"
               >
                 Batal
               </button>
               <button
                 onClick={handleConfirmUpdate}
-                className="px-4 py-2 bg-emerald-300 text-white rounded-4xl"
+                className="px-4 py-2 bg-emerald-500 text-white rounded-4xl"
               >
                 Update
               </button>

@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(app)/layout,_N_T_/(app)/addticket/layout,_N_T_/(app)/addticket/page,_N_T_/addticket"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KGFwcCk/addticket/__PAGE__",
+    "/!KGFwcCk/addticket",
+    "/!KGFwcCk",
+    "/_index",
+    "/_head"
+  ]
+}

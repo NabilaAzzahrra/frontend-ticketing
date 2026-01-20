@@ -1,0 +1,19 @@
+{
+  "/(app)/addkaryawan/page": "app/(app)/addkaryawan/page.js",
+  "/(app)/addticket/page": "app/(app)/addticket/page.js",
+  "/(app)/assigned/page": "app/(app)/assigned/page.js",
+  "/(app)/configuration/page": "app/(app)/configuration/page.js",
+  "/(app)/created/page": "app/(app)/created/page.js",
+  "/(app)/dashboard/page": "app/(app)/dashboard/page.js",
+  "/(app)/divisi/page": "app/(app)/divisi/page.js",
+  "/(app)/headof/page": "app/(app)/headof/page.js",
+  "/(app)/karyawan/edit/[id]/page": "app/(app)/karyawan/edit/[id]/page.js",
+  "/(app)/karyawan/page": "app/(app)/karyawan/page.js",
+  "/(app)/profile/page": "app/(app)/profile/page.js",
+  "/(app)/ringkasan/page": "app/(app)/ringkasan/page.js",
+  "/(auth)/page": "app/(auth)/page.js",
+  "/(auth)/register/page": "app/(auth)/register/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}

@@ -1,0 +1,464 @@
+[00:00:41.723] Server  LOG     ✓ Ready in 34.4s
+[00:00:44.927] Server  LOG     ○ Compiling / ...
+[00:00:58.086] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:41.430] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
+[00:01:41.430] Browser WARN    Tried to use the 'fill' option without the 'Filler' plugin enabled. Please import and register the 'Filler' plugin and make sure it is not disabled in the options
+[00:01:41.430] Browser LOG     QR RESPONSE: {"status":"ready"}
+[00:01:41.586] Browser LOG     MONTHLY STATUS: 200
+[00:01:41.586] Browser LOG     QR RESPONSE: {"status":"ready"}
+[00:01:41.586] Browser LOG     MONTHLY STATUS: 200
+[00:01:44.425] Browser LOG     QR RESPONSE: {"status":"ready"}
+[00:38:41.223] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:38:10.340] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:41:57.206] Server  LOG     ✓ Compiled in 6.6s
+[01:41:57.539] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:03:58.665] Server  LOG     ✓ Compiled in 299ms
+[02:04:02.702] Server  LOG     ✓ Compiled in 903ms
+[02:04:03.780] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:147:46
+Parsing ecmascript source code failed
+  145 |                 <tr key={item.id}>
+  146 |                   <td>{index + 1}</td>
+> 147 |                   <td>{item.campusPrinciple?.}</td>
+      |                                              ^
+  148 |                   <td>{item.division_id}</td>
+  149 |                   <td>{item.division_id}</td>
+  150 |                   <td>{item.division_id}</td>
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:04:04.885] Server  LOG     ✓ Compiled in 98ms
+[02:04:15.983] Server  LOG     ✓ Compiled in 80ms
+[02:04:26.761] Server  LOG     ✓ Compiled in 67ms
+[02:05:10.419] Server  LOG     ✓ Compiled in 82ms
+[02:05:11.929] Server  LOG     ✓ Compiled in 61ms
+[02:05:16.303] Server  LOG     ✓ Compiled in 159ms
+[02:05:16.764] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:148:46
+Parsing ecmascript source code failed
+  146 |                   <td>{index + 1}</td>
+  147 |                   <td>{item.campus_principle_nik}</td>
+> 148 |                   <td>{item.campusPrinciple?.}</td>
+      |                                              ^
+  149 |                   <td>{item.division_id}</td>
+  150 |                   <td>{item.division_id}</td>
+  151 |                   <td className="relative">
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:05:17.716] Server  LOG     ✓ Compiled in 72ms
+[02:05:26.422] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:05:37.918] Server  LOG     ✓ Compiled in 189ms
+[02:05:38.762] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:149:29
+Parsing ecmascript source code failed
+  147 |                   <td>{item.campus_principle_nik}</td>
+  148 |                   <td>{item.campusPrinciple?.name}</td>
+> 149 |                   <td>{item.}</td>
+      |                             ^
+  150 |                   <td>{item.division_id}</td>
+  151 |                   <td className="relative">
+  152 |                     <button
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:05:59.081] Server  LOG     ✓ Compiled in 72ms
+[02:06:03.428] Server  LOG     ✓ Compiled in 120ms
+[02:06:03.763] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:150:37
+Parsing ecmascript source code failed
+  148 |                   <td>{item.campusPrinciple?.name}</td>
+  149 |                   <td>{item.hrd_nik}</td>
+> 150 |                   <td>{item.hrd?name}</td>
+      |                                     ^
+  151 |                   <td className="relative">
+  152 |                     <button
+  153 |                       onClick={() => toggleMenu(item.id)}
+
+Expected '</', got '}'
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:06:08.810] Server  LOG     ✓ Compiled in 71ms
+[02:06:18.902] Server  LOG     ✓ Compiled in 96ms
+[02:06:20.509] Server  LOG     ✓ Compiled in 66ms
+[02:06:25.142] Server  LOG     ✓ Compiled in 61ms
+[02:06:26.844] Server  LOG     ✓ Compiled in 101ms
+[02:06:28.938] Server  LOG     ✓ Compiled in 79ms
+[02:06:32.989] Server  LOG     ✓ Compiled in 66ms
+[02:06:35.551] Server  LOG     ✓ Compiled in 62ms
+[02:06:46.138] Server  LOG     ✓ Compiled in 64ms
+[02:06:57.283] Server  LOG     ✓ Compiled in 69ms
+[02:07:06.147] Server  LOG     ✓ Compiled in 60ms
+[02:16:19.015] Server  LOG     ✓ Compiled in 1433ms
+[02:16:25.269] Server  LOG     ✓ Compiled in 71ms
+[02:16:58.439] Server  LOG     ✓ Compiled in 83ms
+[02:17:14.624] Server  LOG     ✓ Compiled in 78ms
+[02:17:19.724] Server  LOG     ✓ Compiled in 84ms
+[02:17:28.696] Server  LOG     ✓ Compiled in 77ms
+[02:17:38.495] Server  LOG     ✓ Compiled in 68ms
+[02:18:18.317] Server  LOG     ✓ Compiled in 75ms
+[02:18:26.172] Server  LOG     ✓ Compiled in 67ms
+[02:23:15.180] Server  LOG     ✓ Compiled in 75ms
+[02:23:15.764] Browser ERROR   Failed to fetch employee {}
+[02:23:35.510] Server  LOG     ✓ Compiled in 78ms
+[02:23:37.690] Server  LOG     ✓ Compiled in 71ms
+[02:23:41.151] Server  LOG     ✓ Compiled in 96ms
+[02:23:42.403] Server  LOG     ✓ Compiled in 72ms
+[02:24:55.404] Server  LOG     ✓ Compiled in 73ms
+[02:24:55.765] Browser ERROR   Failed to fetch employee {}
+[02:25:06.906] Server  LOG     ✓ Compiled in 67ms
+[02:25:07.781] Browser ERROR   Failed to fetch employee {}
+[02:25:17.666] Server  LOG     ✓ Compiled in 130ms
+[02:25:18.770] Browser ERROR   Failed to fetch employee {}
+[02:25:47.824] Server  LOG     ✓ Compiled in 81ms
+[02:26:09.575] Server  LOG     ✓ Compiled in 87ms
+[02:26:15.645] Server  LOG     ✓ Compiled in 61ms
+[02:26:24.015] Server  LOG     ✓ Compiled in 71ms
+[02:27:02.156] Server  LOG     ✓ Compiled in 68ms
+[02:27:11.120] Server  LOG     ✓ Compiled in 112ms
+[02:27:11.766] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:194:38
+Parsing ecmascript source code failed
+  192 |
+  193 |                             // SET VALUE REACT-SELECT
+> 194 |                             onClick={() => {
+      |                                      ^
+  195 |                             setSelectedId(item.id);
+  196 |
+  197 |                             // SET VALUE REACT-SELECT
+
+Expected '</', got '('
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:27:12.888] Server  LOG     ✓ Compiled in 117ms
+[02:27:17.434] Server  LOG     ✓ Compiled in 74ms
+[02:27:20.363] Server  LOG     ✓ Compiled in 95ms
+[02:27:30.766] Server  LOG     ✓ Compiled in 74ms
+[02:27:37.640] Server  LOG     ✓ Compiled in 61ms
+[02:27:40.667] Server  LOG     ✓ Compiled in 61ms
+[02:27:44.956] Server  LOG     ✓ Compiled in 59ms
+[02:27:54.648] Server  LOG     ✓ Compiled in 63ms
+[02:28:07.979] Server  LOG     ✓ Compiled in 86ms
+[02:28:10.598] Server  LOG     ✓ Compiled in 64ms
+[02:28:14.978] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:28:53.563] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:29:09.999] Server  LOG     ✓ Compiled in 89ms
+[02:29:25.024] Server  LOG     ✓ Compiled in 86ms
+[02:29:30.471] Server  LOG     ✓ Compiled in 74ms
+[02:30:45.497] Server  LOG     ✓ Compiled in 75ms
+[02:30:51.486] Server  LOG     ✓ Compiled in 105ms
+[02:31:09.201] Server  LOG     ✓ Compiled in 137ms
+[02:31:09.767] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:26:11
+Ecmascript file had an error
+  24 |
+  25 |    const [optionscampus_principle_nik, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+> 26 |    const [optionscampus_principle_nik, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+     |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  27 |
+  28 |   // ================= FETCH DATA =================
+  29 |   useEffect(() => {
+
+the name `optionscampus_principle_nik` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:31:09.767] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:26:40
+Ecmascript file had an error
+  24 |
+  25 |    const [optionscampus_principle_nik, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+> 26 |    const [optionscampus_principle_nik, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+     |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  27 |
+  28 |   // ================= FETCH DATA =================
+  29 |   useEffect(() => {
+
+the name `setOptionscampus_principle_nik` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:31:15.176] Server  LOG     ✓ Compiled in 91ms
+[02:31:15.763] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:26:23
+Ecmascript file had an error
+  24 |
+  25 |    const [optionscampus_principle_nik, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+> 26 |    const [optionshrd, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  27 |
+  28 |   // ================= FETCH DATA =================
+  29 |   useEffect(() => {
+
+the name `setOptionscampus_principle_nik` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:31:19.407] Server  LOG     ✓ Compiled in 84ms
+[02:31:33.141] Server  LOG     ✓ Compiled in 101ms
+[02:31:33.774] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:26:27
+Ecmascript file had an error
+  24 |
+  25 |    const [optionscampus_principle_nik, setOptionscampus_principle_nik] = useState<OptionType[]>([]);
+> 26 |    const [optionshrd_nik, sethrd_nik] = useState<OptionType[]>([]);
+     |                           ^^^^^^^^^^
+  27 |
+  28 |   // ================= FETCH DATA =================
+  29 |   useEffect(() => {
+
+the name `sethrd_nik` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:32:03.458] Server  LOG     ✓ Compiled in 66ms
+[02:32:13.591] Server  LOG     ✓ Compiled in 102ms
+[02:32:15.059] Server  LOG     ✓ Compiled in 68ms
+[02:32:25.949] Server  LOG     ✓ Compiled in 73ms
+[02:32:30.899] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:33:37.618] Server  LOG     ✓ Compiled in 78ms
+[02:33:57.644] Server  LOG     ✓ Compiled in 78ms
+[02:34:19.584] Server  LOG     ✓ Compiled in 69ms
+[02:34:23.511] Server  LOG     ✓ Compiled in 64ms
+[02:34:31.814] Server  LOG     ✓ Compiled in 73ms
+[02:34:36.394] Server  LOG     ✓ Compiled in 160ms
+[02:34:36.765] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:107:5
+Parsing ecmascript source code failed
+  105 |     }
+  106 |     const 
+> 107 |     try {
+      |     ^^^
+  108 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+  109 |         method: "PATCH",
+  110 |         headers: {
+
+Expected ident
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:34:40.495] Server  LOG     ✓ Compiled in 93ms
+[02:34:40.774] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:106:11
+Parsing ecmascript source code failed
+  104 |       return;
+  105 |     }
+> 106 |     const campus
+      |           ^^^^^^
+  107 |     try {
+  108 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+  109 |         method: "PATCH",
+
+'const' declarations must be initialized
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:34:46.767] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:106:11
+Parsing ecmascript source code failed
+  104 |       return;
+  105 |     }
+> 106 |     const campus_principle_nik 
+      |           ^^^^^^^^^^^^^^^^^^^^
+  107 |     try {
+  108 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+  109 |         method: "PATCH",
+
+'const' declarations must be initialized
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:34:50.564] Server  LOG     ✓ Compiled in 87ms
+[02:34:50.775] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:107:5
+Parsing ecmascript source code failed
+  105 |     }
+  106 |     const campus_principle_nik = 
+> 107 |     try {
+      |     ^^^
+  108 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+  109 |         method: "PATCH",
+  110 |         headers: {
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:35:59.218] Server  LOG     ✓ Compiled in 66ms
+[02:36:01.735] Server  LOG     ✓ Compiled in 72ms
+[02:36:02.766] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:107:11
+Ecmascript file had an error
+  105 |     }
+  106 |     const campus_principle_nik = campus_principle_nik.value;
+> 107 |     const campus_principle_nik = campus_principle_nik.value;
+      |           ^^^^^^^^^^^^^^^^^^^^
+  108 |     try {
+  109 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+  110 |         method: "PATCH",
+
+the name `campus_principle_nik` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:36:06.476] Server  LOG     ✓ Compiled in 72ms
+[02:36:11.085] Server  LOG     ✓ Compiled in 64ms
+[02:36:41.446] Server  LOG     ✓ Compiled in 70ms
+[02:36:43.301] Server  LOG     ✓ Compiled in 66ms
+[02:37:48.056] Server  LOG     ✓ Compiled in 130ms
+[02:37:49.707] Server  LOG     ✓ Compiled in 66ms
+[02:38:02.408] Server  LOG     ✓ Compiled in 160ms
+[02:38:07.439] Server  LOG     ✓ Compiled in 73ms
+[02:38:12.514] Server  LOG     ✓ Compiled in 74ms
+[02:38:41.945] Server  LOG     ✓ Compiled in 72ms
+[02:38:49.409] Server  LOG     ✓ Compiled in 69ms
+[02:38:55.572] Server  LOG     ✓ Compiled in 75ms
+[02:39:05.437] Server  LOG     ✓ Compiled in 64ms
+[02:39:08.483] Server  LOG     ✓ Compiled in 67ms
+[02:39:40.909] Server  LOG     ✓ Compiled in 67ms
+[02:39:47.486] Server  LOG     ✓ Compiled in 72ms
+[02:39:57.309] Server  LOG     ✓ Compiled in 69ms
+[02:40:05.264] Server  LOG     ✓ Compiled in 66ms
+[02:40:07.196] Server  LOG     ✓ Compiled in 85ms
+[02:40:07.765] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:105:21
+Parsing ecmascript source code failed
+  103 |
+  104 |     const campus_principle_nik = campusPrinciple.value;
+> 105 |     const hrd_nik = .value;
+      |                     ^
+  106 |
+  107 |     try {
+  108 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:40:10.763] Browser ERROR   ./frontend/app/(app)/configuration/page.tsx:105:21
+Parsing ecmascript source code failed
+  103 |
+  104 |     const campus_principle_nik = campusPrinciple.value;
+> 105 |     const hrd_nik = .value;
+      |                     ^
+  106 |
+  107 |     try {
+  108 |       await fetch(`http://localhost:3001/api/configuration/${selectedId}`, {
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component Browser]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./frontend/app/(app)/configuration/page.tsx [Client Component SSR]
+    ./frontend/app/(app)/configuration/page.tsx [Server Component]
+[02:40:13.147] Server  LOG     ✓ Compiled in 64ms
+[02:40:16.665] Server  LOG     ✓ Compiled in 61ms
+[02:41:59.018] Server  LOG     ✓ Compiled in 81ms
+[02:42:26.672] Server  LOG     ✓ Compiled in 96ms
+[02:42:44.913] Server  LOG     ✓ Compiled in 65ms
+[02:43:15.785] Server  LOG     ✓ Compiled in 80ms
+[02:43:17.190] Server  LOG     ✓ Compiled in 69ms
+[02:43:23.898] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:43:54.474] Server  LOG     ✓ Compiled in 82ms
+[02:43:57.020] Server  LOG     ✓ Compiled in 67ms
+[02:43:59.379] Server  LOG     ✓ Compiled in 74ms
+[02:44:06.820] Server  LOG     ✓ Compiled in 70ms
+[02:44:11.580] Server  LOG     ✓ Compiled in 90ms
+[02:44:13.951] Server  LOG     ✓ Compiled in 65ms
+[02:44:38.027] Server  LOG     ✓ Compiled in 70ms
+[02:44:42.871] Server  LOG     ✓ Compiled in 64ms
+[02:49:49.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:50:04.383] Browser ERROR   {}
+[02:50:15.283] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:50:27.011] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:50:36.617] Browser ERROR   {}
+[02:51:36.797] Server  LOG     ✓ Compiled in 117ms
+[02:51:39.801] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:22:35.158] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
